@@ -1,0 +1,60 @@
+<div class="grid grid-cols-1 gap-4">
+  <div>
+    <h1 class="heading">Room 1</h1>
+    <div id="msg" class="text-white w-full overflow-y-scroll "></div>
+    <div class="absolute  w-3/4 divide-y divide-slate-200 ">
+      <%= form_for @message, remote: true do |f| %>
+        <input type="text" name="message[content]" id="message_content",class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <input type="submit" name="commit" value="Create Message" data-disable-with="Create Message " class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <script>
+        let submit_messages;
+        $(document).on('turbolinks:load', function () {
+          submit_messages()
+        })
+
+        submit_messages = function () {
+          $('#message_content').on('keydown', function (event) {
+            if (event.keyCode == 13) {
+              $('input').click()
+              event.target.value = ''
+              event.preventDefault()
+            }
+          })
+        }
+      </script>
+      <style>
+        div.absolute {
+          position: absolute;
+          bottom: 10px;
+          padding:1%;
+
+
+        }
+        #msg{
+            padding:1%;
+            min-height: 500px;
+            max-height: 500px;
+
+
+
+        }
+
+        div.message
+        {
+
+            padding:1%;
+
+            height:10%;
+
+            background:grey;
+
+        }
+        .heading{
+            align-self:center;
+        }
+      </style>
